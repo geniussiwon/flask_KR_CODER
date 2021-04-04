@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>kr_corder 질문목록</title>
+<div class="container my-5">
+    <h1 class="border-bottom text-center border-top py-2">질문리스트</h1>
+    <table class="table my-5">
+        <thead>
+        <tr class="thead-light">
+            <th>번호</th>
+            <th>제목</th>
+            <th>질문자</th>
+            <th>작성일시</th>
+            <th>답변 수</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if question_list.items %}
+        {% for question in question_list.items %}
+        <tr>
+            <td>{{ question_list.total - ((question_list.page-1) * question_list.per_page) - loop.index0 }}</td>
+            <td><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a></td>
+            <td>{{ question.user.username }}</td>
+            <td>{{ question.create_date|datetime }}</td>
+            <td class="text-warning small ml-2">{{ question.answer_set|length }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('question.create') }}" class="btn btn-outline-info my-3 btn-lr">질문 등록하기</a>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% for page_num in question_list.iter_pages() %}
+            {% if page_num %}
+                {% if page_num != question_list.page %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% else %}
+                <li class="disabled">
+                    <a class="page-link" href="#">...</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    <!-- 페이징처리 끝 -->
+</div>
+{% endblock %}

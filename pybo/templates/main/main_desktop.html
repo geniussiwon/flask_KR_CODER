@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>KR_CORDER</title>
+<div class = "container my-5">
+    <div class="card border-primary" style="max-width: 28rem;">
+        <div class="card-header bg-transparent border-primary">KR_코더의 질문들</div>
+        <img class="card-img-top card-header bg-transparent border-primary" src = "https://postfiles.pstatic.net/MjAyMTA0MDRfMjk0/MDAxNjE3NDk0NzkyOTU4.yO2bWngVwwC3vIsFPVIchRSVR6aEDlsB_63MgFTXB48g.Dnr_pToN8EqiqsQyZgOwPgcDq8BuurDmEFh-P91YP1gg.PNG.siwoncool18/image.png?type=w773" alt = "질문">
+        <div class="card-body text-secondary">
+          <h4>코딩 관련 질문</h4>
+          <p>한국말이 이용된 코딩관련 KR_CORDER들의 질문과 그에 대한 답변들 직접 사용하십시오.</p>
+          <p>(로그인을 안할경우 익명으로 표기됩니다.)</p>
+        </div>
+        <a href="{{url_for('question._list')}}" class="btn btn-primary">질문하러 가기</a>
+</div>
+{% endblock %}
